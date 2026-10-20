@@ -1,103 +1,83 @@
-# EE3005 · Biomedical System Design Capsule-S1 — Image Processing Assignment 2
+# EE3005 Image Processing — Assignment 2
 
-**Image enhancement · Spatial filtering · Denoising · Sharpening · Edge detection**
+**Biomedical image enhancement, spatial filtering, denoising, sharpening, and edge detection**
 
-**Author:** Burak Bekir Çakırer  
-**Student ID:** 2211011008  
-**Course:** EE3005 — BIOMEDICAL SYSTEM DESIGN CAPSULE-S1  
-**Deliverable:** Image Processing Assignment 2, Tasks 1–8  
-**Planned GitHub URL:** https://github.com/burakcakirer/ee3005-image-processing-assignment-2 *(available after publication)*
+[![Course](https://img.shields.io/badge/course-EE3005-blue)](#)
+[![MATLAB](https://img.shields.io/badge/MATLAB-R2020a%2B-orange)](#matlab-implementation)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB)](#python-reference)
+[![Status](https://img.shields.io/badge/MATLAB%20run-not%20yet%20verified-yellow)](#execution-status)
+[![Use](https://img.shields.io/badge/use-educational%20only-lightgrey)](#scope-and-limitations)
 
-This repository contains a reproducible set of **image-processing experiments on course-provided biomedical examples**. It includes a MATLAB implementation, an independently executed Python reference, fixed image/noise inputs, quantitative results, report figures, validation checks, and a report in **PDF, DOCX, and Overleaf-ready LaTeX**.
+| | |
+|---|---|
+| **Author** | Burak Bekir Çakırer (Student ID 2211011008) |
+| **Course** | EE3005 — Biomedical System Design Capsule-S1 |
+| **Deliverable** | Image Processing Assignment 2, Tasks 1–8 |
+| **Repository** | https://github.com/burakcakirer/ee3005-image-processing-assignment-2 *(available after publication)* |
 
-**Report policy:** The report contains the methodology, equations, intermediate calculations, results, figures, and interpretation—**no MATLAB or Python code listings**. Complete source code is available separately in `MATLAB/`, `Python_Reference/`, and `tools/`.
+---
 
-> **Execution transparency:** The numerical results and figures in the report were generated with the **executed Python reference** and checked for internal consistency. The MATLAB implementation is supplied for the assignment but **has not been executed in MATLAB in this environment**. Library-specific differences (especially CLAHE and boundary conventions) can affect exact MATLAB outputs. Do not describe these measurements as MATLAB-verified before running the `.m` file.
+## Overview
 
-## Contents
+This repository provides a reproducible set of image-processing experiments on course-supplied biomedical images (a chest radiograph and a brain MRI). It contains:
 
-| Task | Subject | Experiment / deliverable |
-|:---:|---|---|
-| 1 | Histogram equalization, AHE, CLAHE | Global vs. local contrast; two CLAHE configurations; histograms and local contrast metrics |
-| 2 | Correlation, convolution, borders | Hand-calculated center-pixel outputs; zero, replicate, reflect, and circular padding |
-| 3 | Separable Gaussian filtering | 2D vs. successive 1D filters; maximum numerical difference and operation count |
-| 4 | Linear noise removal | Gaussian and salt-and-pepper noise; mean/Gaussian alternatives; PSNR comparison |
-| 5 | Nonlinear filters | Median, geometric/harmonic means, contra-harmonic polarity and order; PSNR |
-| 6 | Unsharp masking | Three gain levels; detail visibility and over-sharpening artifacts |
-| 7 | Edge detection | Sobel, Laplacian, LoG, DoG; noise sensitivity and scale effects |
-| 8 | Integrated pipeline | Median → CLAHE → unsharp masking; intermediates and critical evaluation |
+- a **MATLAB** implementation of Tasks 1–8,
+- an independently executed **Python reference** that generated all reported numbers and figures,
+- fixed input images and deterministic noise realizations,
+- quantitative results, validation tests, and
+- a full report in **PDF, DOCX, and Overleaf-ready LaTeX**.
 
-### Example result
+The report presents methodology, equations, hand calculations, results, figures, and interpretation. It intentionally contains **no code listings**; the source is available in `MATLAB/`, `Python_Reference/`, and `tools/`.
 
-![Pipeline showing noisy radiograph, median filtered image, CLAHE, and sharpening](Report/Figures/F10_pipeline.png)
+![Integrated pipeline: noisy radiograph, median filtering, CLAHE, unsharp masking](Report/Figures/F10_pipeline.png)
 
-<sub>Task 8: The integrated workflow. All image examples are for coursework, not diagnostic use.</sub>
+<sub>Task 8 — integrated pipeline. All images are for coursework and are not intended for diagnostic use.</sub>
 
-## Key measured findings
+## Execution status
 
-| Measurement | Reference result |
+> **Important:** All numerical results and figures were produced by the **executed Python reference** and checked for internal consistency. The MATLAB implementation is supplied for the assignment but **has not been executed in MATLAB**. Library differences (notably CLAHE implementations and boundary handling) may change MATLAB outputs slightly. Do not describe results as MATLAB-verified until the `.m` script has been run and compared.
+
+## Tasks
+
+| # | Topic | Experiment |
+|:-:|---|---|
+| 1 | Histogram equalization, AHE, CLAHE | Global vs. local contrast, two CLAHE configurations, histograms, local contrast metrics |
+| 2 | Correlation, convolution, borders | Hand-calculated center-pixel outputs; zero, replicate, reflect, circular padding |
+| 3 | Separable Gaussian filtering | 2D vs. two 1D passes; maximum difference and operation count |
+| 4 | Linear denoising | Gaussian and salt-and-pepper noise; mean/Gaussian filters; PSNR comparison |
+| 5 | Nonlinear filtering | Median, geometric/harmonic means, contra-harmonic (polarity and order) |
+| 6 | Unsharp masking | Three gain levels; detail enhancement vs. over-sharpening |
+| 7 | Edge detection | Sobel, Laplacian, LoG, DoG; noise sensitivity and scale |
+| 8 | Integrated pipeline | Median → CLAHE → unsharp masking with intermediate results and critical evaluation |
+
+## Key results
+
+| Measurement | Result |
 |---|---:|
-| Task 2 — central correlation | **−80** |
-| Task 2 — central convolution | **+80** |
-| Task 3 — max. 2D / separable difference | **≈ 3.33 × 10⁻¹⁶** |
-| Task 3 — multiplication count (3×3) | **9 → 6 per pixel** |
-| Task 4 — best tested filter for Gaussian noise | **3×3 Gaussian, σ = 0.8; 30.74 dB PSNR** |
-| Task 5 — salt-and-pepper: median 3×3 vs. mean 3×3 | **34.88 vs. 23.03 dB PSNR** |
+| Task 2 — central correlation output | **−80** |
+| Task 2 — central convolution output | **+80** |
+| Task 3 — max. difference, 2D vs. separable | **≈ 3.33 × 10⁻¹⁶** |
+| Task 3 — multiplications per pixel (3×3) | **9 → 6** |
+| Task 4 — best tested filter, Gaussian noise | **3×3 Gaussian (σ = 0.8), 30.74 dB** |
+| Task 5 — salt-and-pepper, median 3×3 vs. mean 3×3 | **34.88 dB vs. 23.03 dB** |
 
-Scores are calculated against each clean reference using the stored noise realizations. Higher PSNR does not automatically imply clinically better visibility; contrast operations may deliberately change the intensity distribution. Full tables and limitations are in the report.
+PSNR is computed against the clean reference using stored noise realizations. A higher PSNR does not necessarily mean better clinical visibility, since contrast operations intentionally alter the intensity distribution. Complete tables are in the report.
 
-## Repository layout
+## Quick start
 
-```text
-ee3005-image-processing-assignment-2/
-├── .gitignore
-├── .gitattributes
-├── README.md
-├── docs/
-│   └── GITHUB_DESKTOP_TR.md        # Windows / D:\GitHub upload walkthrough (Turkish)
-├── MATLAB/
-│   └── run_assignment2.m           # MATLAB implementation for Tasks 1–8
-├── Python_Reference/
-│   ├── reproduce_results.py        # Executed reference experiments and figure generator
-│   └── requirements.txt
-├── Source_Images/
-│   ├── Original_Samples/           # Instructor-supplied examples (includes DICOM)
-│   └── Prepared_Inputs/            # Converted grayscale and deterministic noisy PNGs
-├── Outputs/
-│   └── Results/                    # CSV, JSON, manual calculation log
-├── Report/
-│   ├── EE3005_Assignment2_Report.pdf
-│   ├── EE3005_Assignment2_Report.docx
-│   ├── main.tex                    # Text/results only; no embedded code
-│   ├── Figures/                    # 11 result figures referenced by the report
-│   └── README_OVERLEAF.md
-├── Original_Assignment/
-│   └── Assignment_2_Instructions.pdf
-├── Tests/
-│   ├── validate_outputs.py
-│   └── check_report_policy.py       # Confirms code listings are absent from report
-└── tools/
-    └── build_report.py            # Regenerates code-free DOCX and main.tex
-```
+### MATLAB implementation
 
-The project root is the working directory. Keep the relative directory structure intact: scripts find input and output directories relative to their own locations.
+**Requirements:** MATLAB (R2020a or newer recommended) with the Image Processing Toolbox.
 
-## Get started
+1. Open `MATLAB/run_assignment2.m`.
+2. Click **Run** (no path changes needed; paths are resolved relative to the script).
+3. Figures are written to `Outputs/MATLAB_Figures/`, data to `Outputs/MATLAB_Results/`.
 
-### MATLAB (course-required implementation)
+The script loads the bundled PNGs in `Source_Images/Prepared_Inputs` so that noise realizations are identical across environments. Review MATLAB output separately before claiming equivalence with the Python reference.
 
-**Requirements:** MATLAB with **Image Processing Toolbox**. The script uses `exportgraphics` (MATLAB R2020a or newer recommended).
+### Python reference
 
-1. Open `MATLAB/run_assignment2.m` in MATLAB.
-2. Choose **Run**; there is no need to modify absolute Windows paths.
-3. Output images are written to `Outputs/MATLAB_Figures/`, and CSV/measurement data to `Outputs/MATLAB_Results/`.
-4. Review MATLAB-generated results separately before claiming numerical equivalence to the Python reference.
-
-This implementation loads the fixed, bundled `Source_Images/Prepared_Inputs` PNGs to keep the noise realization consistent across environments.
-
-### Python reference (Windows PowerShell)
-
-**Requirements:** Python 3.10 or later recommended. Run these commands from the repository root (for example `D:\GitHub\ee3005-image-processing-assignment-2`).
+**Requirements:** Python 3.10+ (NumPy, SciPy, scikit-image, OpenCV, Pillow, Matplotlib). Run from the repository root:
 
 ```powershell
 py -m venv .venv
@@ -107,60 +87,95 @@ python Python_Reference/reproduce_results.py
 python Tests/validate_outputs.py
 ```
 
-If PowerShell blocks activation, you can run the executable directly: `\.venv\Scripts\python.exe Python_Reference\reproduce_results.py`. You may alternatively use an existing Python installation.
+If PowerShell blocks activation, call the interpreter directly: `.\.venv\Scripts\python.exe Python_Reference\reproduce_results.py`.
 
-The reference uses RNG seed `3005`, rebuilds prepared image/noise PNGs, writes `Outputs/Results` data, and regenerates the 11 images in `Report/Figures/`. Its principal dependencies are NumPy, SciPy, scikit-image, OpenCV, Pillow, and Matplotlib.
+The script uses RNG seed `3005`, rebuilds the prepared and noisy images, writes data to `Outputs/Results/`, and regenerates the 11 figures in `Report/Figures/`.
 
-### Validate packaged outputs
+### Validation
 
 ```powershell
 python Tests/validate_outputs.py
 python Tests/check_report_policy.py
 ```
 
-Checks include Task 2's hand-computed outputs, separable Gaussian agreement, noise/filter comparisons, expected figures, and grayscale input formats. They check **reference-data consistency and the code-free report policy**, not full MATLAB-runtime correctness.
+The tests verify Task 2 hand calculations, 2D/separable Gaussian agreement, noise and filter comparisons, expected figures, and grayscale input formats, as well as the absence of code listings in the report. They confirm **reference-data consistency**, not MATLAB runtime correctness.
 
-## Report files, academic references, and editing
+## Repository structure
+
+```text
+ee3005-image-processing-assignment-2/
+├── MATLAB/
+│   └── run_assignment2.m             # MATLAB implementation (Tasks 1–8)
+├── Python_Reference/
+│   ├── reproduce_results.py          # Reference experiments and figure generator
+│   └── requirements.txt
+├── Source_Images/
+│   ├── Original_Samples/             # Instructor-supplied examples (incl. DICOM)
+│   └── Prepared_Inputs/              # Grayscale and deterministic noisy PNGs
+├── Outputs/
+│   └── Results/                      # CSV, JSON, manual calculation log
+├── Report/
+│   ├── EE3005_Assignment2_Report.pdf
+│   ├── EE3005_Assignment2_Report.docx
+│   ├── main.tex                      # Overleaf-ready, code-free
+│   ├── Figures/                      # 11 report figures
+│   └── README_OVERLEAF.md
+├── Original_Assignment/
+│   └── Assignment_2_Instructions.pdf
+├── Tests/
+│   ├── validate_outputs.py
+│   └── check_report_policy.py
+├── tools/
+│   └── build_report.py               # Regenerates DOCX and main.tex
+└── docs/
+    └── GITHUB_DESKTOP_TR.md          # GitHub Desktop walkthrough (Turkish)
+```
+
+Keep the relative layout intact: scripts locate inputs and outputs relative to their own position.
+
+## Report
 
 | File | Purpose |
 |---|---|
-| [`Report/EE3005_Assignment2_Report.pdf`](Report/EE3005_Assignment2_Report.pdf) | Ready-to-read PDF report |
-| [`Report/EE3005_Assignment2_Report.docx`](Report/EE3005_Assignment2_Report.docx) | Editable Word report |
-| [`Report/main.tex`](Report/main.tex) | Standalone Overleaf document (`pdfLaTeX`) |
-| [`Report/Figures/`](Report/Figures/) | Figures required by LaTeX and report |
+| [`EE3005_Assignment2_Report.pdf`](Report/EE3005_Assignment2_Report.pdf) | Read-ready PDF |
+| [`EE3005_Assignment2_Report.docx`](Report/EE3005_Assignment2_Report.docx) | Editable Word version |
+| [`main.tex`](Report/main.tex) | Standalone Overleaf source (pdfLaTeX) |
+| [`Figures/`](Report/Figures/) | Figures used by the report |
 
-The report is intentionally source-code-free. Its formulas, numerical computations, tables, and visual results **remain included**, alongside an academic **References** section and a clickable link to the proposed GitHub repository. The full implementation is linked from the repository rather than printed as an appendix.
-
-To rebuild the **DOCX and `main.tex`** after editing measurements or narration, install `python-docx` and run:
+To rebuild the DOCX and LaTeX after editing results or text:
 
 ```powershell
 python -m pip install python-docx
 python tools/build_report.py
 ```
 
-Then export the updated DOCX as PDF, for example in Microsoft Word (*File → Export → Create PDF/XPS*) or a compatible office application. **Running the report builder does not automatically re-export the PDF**. For Overleaf upload instructions see [`Report/README_OVERLEAF.md`](Report/README_OVERLEAF.md).
+The builder does **not** re-export the PDF; export the updated DOCX manually (e.g., Word → *File → Export → Create PDF/XPS*). Overleaf instructions: [`Report/README_OVERLEAF.md`](Report/README_OVERLEAF.md).
 
-> **Submission-format note:** The supplied assignment guidelines mention a **single Word report** and also request MATLAB source. This repository separates code from report by design. Follow your instructor's actual submission requirements when uploading to the LMS; the PDF is available because it was explicitly requested for this project.
+> **Submission note:** The assignment guidelines mention a single Word report together with MATLAB source. This repository separates code from the report by design. Follow your instructor's actual LMS submission requirements.
 
-## Experimental setup and limitations
+## Experimental setup
 
-- **Input examples:** `image3.jpg` (chest radiograph) and `image2.jpg` (brain MRI), extracted from the supplied assignment archive. Remaining original files are preserved; two DICOM files are included but not directly analyzed.
-- **Image representation:** 8-bit grayscale files, intensity values normalized to `[0, 1]` during processing.
-- **Noise:** Gaussian standard deviation `0.06`; salt-and-pepper density `0.08`, plus individual salt and pepper inputs. The pipeline uses Gaussian `0.03` + impulse density `0.025`.
-- **Comparisons:** PSNR calculated against clean images, consistent input shapes, explicit kernel sizes and strengths.
-- **Boundary conventions:** Python SciPy modes and MATLAB `imfilter` modes are documented separately. CLAHE implementation details and pixel rounding can vary.
-- **Interpretation:** No clinical labels, diagnostic validation, patient metadata, or external medical ground truth are provided. Results are educational image-processing demonstrations only.
+| Item | Setting |
+|---|---|
+| Images | `image3.jpg` (chest radiograph), `image2.jpg` (brain MRI) from the supplied archive |
+| Representation | 8-bit grayscale, normalized to [0, 1] |
+| Noise (Tasks 4–5) | Gaussian σ = 0.06; salt-and-pepper density 0.08; separate salt and pepper inputs |
+| Noise (Task 8) | Gaussian σ = 0.03 + impulse density 0.025 |
+| Metric | PSNR against the clean image, identical shapes, explicit kernel sizes and strengths |
+| Reproducibility | RNG seed 3005; stored noisy PNGs |
 
-## Publishing with GitHub Desktop
+## Scope and limitations
 
-For instructions specifically using **`D:\GitHub`**, GitHub Desktop's **Add Local Repository** workflow, committing, and **Publish repository**, see the [Turkish GitHub Desktop guide](docs/GITHUB_DESKTOP_TR.md).
+- Results are **educational image-processing demonstrations**. No clinical labels, diagnostic validation, patient metadata, or external ground truth are used.
+- Python (SciPy) and MATLAB (`imfilter`) boundary modes are documented separately; CLAHE implementation details and rounding may differ between them.
+- Two DICOM files are included but not analyzed.
 
-**GitHub link notice:** The report links to `https://github.com/burakcakirer/ee3005-image-processing-assignment-2`. Publish using exactly this account and name for the report link to become valid. If you choose another name, update `REPOSITORY_URL` in `tools/build_report.py`, regenerate the reports, and replace the PDF before submitting.
+## Data rights and publishing
 
-**Do not place the project folder inside a second identically named folder.** After extracting the ZIP, this file should be at `D:\GitHub\ee3005-image-processing-assignment-2\README.md`.
+Source images and the assignment PDF come from course materials, and their public redistribution rights are not established. Before making the repository **public**, obtain permission or remove restricted assets; a **private** repository is preferable if in doubt. No software license is asserted.
 
-**Dataset rights and privacy:** Source images and the assignment PDF came from course materials; their public redistribution rights are not established. Before creating a **public** repository, obtain permission or omit any restricted assets. A **private repository** is preferable if permission is uncertain. No software-wide open-source license is asserted here.
+The report links to `https://github.com/burakcakirer/ee3005-image-processing-assignment-2`. To use a different name, update `REPOSITORY_URL` in `tools/build_report.py`, rebuild the report, and re-export the PDF. For publishing steps with GitHub Desktop, see the [Turkish guide](docs/GITHUB_DESKTOP_TR.md). Do not nest the project inside a second folder of the same name.
 
 ---
 
-**Project owner:** Burak Bekir Çakırer · EE3005 — Biomedical System Design Capsule-S1 · Assignment 2 · 2211011008
+**Burak Bekir Çakırer** · EE3005 — Biomedical System Design Capsule-S1 · Assignment 2 · 2211011008
