@@ -1,0 +1,14 @@
+noise,filter,psnr_db
+mixed_salt_pepper,Noisy,14.8669
+mixed_salt_pepper,Mean 3x3,23.0336
+mixed_salt_pepper,Median 3x3,34.8843
+mixed_salt_pepper,Median 5x5,30.8231
+gaussian,Geometric 3x3,30.6709
+gaussian,Harmonic 3x3,28.0679
+gaussian,Mean 3x3,30.4373
+salt_only,Noisy,12.1426
+pepper_only,Noisy,22.9288
+salt_only,Contra 3x3 Q=+1.5,4.8036
+salt_only,Contra 3x3 Q=-1.5,29.1423
+pepper_only,Contra 3x3 Q=+1.5,28.8756
+pepper_only,Contra 3x3 Q=-1.5,14.7808

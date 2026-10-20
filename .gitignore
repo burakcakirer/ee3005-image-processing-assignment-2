@@ -1,0 +1,44 @@
+# Python and local development
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+.env
+.env.*
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# MATLAB session files and regenerated MATLAB-only results
+*.asv
+*.autosave
+*.m~
+*.mlx.autosave
+/Outputs/MATLAB_Figures/
+/Outputs/MATLAB_Results/
+
+# LaTeX / Overleaf compilation byproducts
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.xdv
+
+# Local renders, checks, and temporary exports
+/_work*/
+/report_render*/
+*.tmp
+*.bak
+~$*.docx

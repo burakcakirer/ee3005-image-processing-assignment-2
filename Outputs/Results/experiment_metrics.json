@@ -1,0 +1,281 @@
+{
+  "random_seed": 3005,
+  "inputs": {
+    "chest": "provided image3.jpg converted to grayscale png",
+    "brain": "provided image2.jpg converted to grayscale png"
+  },
+  "t1_contrast_metrics": {
+    "Original": {
+      "global_std": 0.19077038339708416,
+      "central_roi_std": 0.16576339831654968
+    },
+    "HE": {
+      "global_std": 0.2883235440536283,
+      "central_roi_std": 0.2669584073901702
+    },
+    "AHE": {
+      "global_std": 0.22222277985877917,
+      "central_roi_std": 0.205367672818404
+    },
+    "CLAHE_8x8_0.01": {
+      "global_std": 0.22940216683735531,
+      "central_roi_std": 0.22537123050013416
+    },
+    "CLAHE_16x16_0.03": {
+      "global_std": 0.2089574018075643,
+      "central_roi_std": 0.19242215801817225
+    }
+  },
+  "t2_center_patch": [
+    [
+      25,
+      35,
+      45
+    ],
+    [
+      30,
+      40,
+      50
+    ],
+    [
+      35,
+      45,
+      55
+    ]
+  ],
+  "t2_kernel": [
+    [
+      1,
+      0,
+      -1
+    ],
+    [
+      2,
+      0,
+      -2
+    ],
+    [
+      1,
+      0,
+      -1
+    ]
+  ],
+  "t2_corr_center": -80,
+  "t2_conv_center": 80,
+  "t2_boundary_mae_vs_reflection": {
+    "Zero": 0.13888289364436207,
+    "Replicate": 0.0023931206265822465,
+    "Reflect": 0.0,
+    "Circular": 0.057384218254049005
+  },
+  "t3_kernel": [
+    [
+      0.0625,
+      0.125,
+      0.0625
+    ],
+    [
+      0.125,
+      0.25,
+      0.125
+    ],
+    [
+      0.0625,
+      0.125,
+      0.0625
+    ]
+  ],
+  "t3_kernel_outer_product": [
+    [
+      0.0625,
+      0.125,
+      0.0625
+    ],
+    [
+      0.125,
+      0.25,
+      0.125
+    ],
+    [
+      0.0625,
+      0.125,
+      0.0625
+    ]
+  ],
+  "t3_max_abs_difference": 3.3306690738754696e-16,
+  "t3_multiplications_per_pixel": {
+    "direct": 9,
+    "separable": 6
+  },
+  "t4_psnr": [
+    {
+      "noise": "Gaussian sigma=.06",
+      "filter": "Noisy",
+      "psnr_db": 25.8913
+    },
+    {
+      "noise": "Gaussian sigma=.06",
+      "filter": "Mean 3x3",
+      "psnr_db": 30.4373
+    },
+    {
+      "noise": "Gaussian sigma=.06",
+      "filter": "Mean 5x5",
+      "psnr_db": 28.1666
+    },
+    {
+      "noise": "Gaussian sigma=.06",
+      "filter": "Gaussian 3x3 s=.8",
+      "psnr_db": 30.736
+    },
+    {
+      "noise": "Gaussian sigma=.06",
+      "filter": "Gaussian 7x7 s=1.4",
+      "psnr_db": 29.0378
+    },
+    {
+      "noise": "Salt-pepper density=.08",
+      "filter": "Noisy",
+      "psnr_db": 14.8669
+    },
+    {
+      "noise": "Salt-pepper density=.08",
+      "filter": "Mean 3x3",
+      "psnr_db": 23.0336
+    },
+    {
+      "noise": "Salt-pepper density=.08",
+      "filter": "Mean 5x5",
+      "psnr_db": 24.5305
+    },
+    {
+      "noise": "Salt-pepper density=.08",
+      "filter": "Gaussian 3x3 s=.8",
+      "psnr_db": 22.1893
+    },
+    {
+      "noise": "Salt-pepper density=.08",
+      "filter": "Gaussian 7x7 s=1.4",
+      "psnr_db": 24.7828
+    }
+  ],
+  "t5_psnr": [
+    {
+      "noise": "mixed_salt_pepper",
+      "filter": "Noisy",
+      "psnr_db": 14.8669
+    },
+    {
+      "noise": "mixed_salt_pepper",
+      "filter": "Mean 3x3",
+      "psnr_db": 23.0336
+    },
+    {
+      "noise": "mixed_salt_pepper",
+      "filter": "Median 3x3",
+      "psnr_db": 34.8843
+    },
+    {
+      "noise": "mixed_salt_pepper",
+      "filter": "Median 5x5",
+      "psnr_db": 30.8231
+    },
+    {
+      "noise": "gaussian",
+      "filter": "Geometric 3x3",
+      "psnr_db": 30.6709
+    },
+    {
+      "noise": "gaussian",
+      "filter": "Harmonic 3x3",
+      "psnr_db": 28.0679
+    },
+    {
+      "noise": "gaussian",
+      "filter": "Mean 3x3",
+      "psnr_db": 30.4373
+    },
+    {
+      "noise": "salt_only",
+      "filter": "Noisy",
+      "psnr_db": 12.1426
+    },
+    {
+      "noise": "pepper_only",
+      "filter": "Noisy",
+      "psnr_db": 22.9288
+    },
+    {
+      "noise": "salt_only",
+      "filter": "Contra 3x3 Q=+1.5",
+      "psnr_db": 4.8036
+    },
+    {
+      "noise": "salt_only",
+      "filter": "Contra 3x3 Q=-1.5",
+      "psnr_db": 29.1423
+    },
+    {
+      "noise": "pepper_only",
+      "filter": "Contra 3x3 Q=+1.5",
+      "psnr_db": 28.8756
+    },
+    {
+      "noise": "pepper_only",
+      "filter": "Contra 3x3 Q=-1.5",
+      "psnr_db": 14.7808
+    }
+  ],
+  "t6_sharpening": {
+    "0.5": {
+      "clipped_percentage": 5.346621520453704,
+      "mean_absolute_change": 0.004368814448823355
+    },
+    "1": {
+      "clipped_percentage": 6.239738999550815,
+      "mean_absolute_change": 0.008444966018490796
+    },
+    "2.5": {
+      "clipped_percentage": 8.013102558781577,
+      "mean_absolute_change": 0.019587282602816735
+    }
+  },
+  "t7_edge_stats": {
+    "sobel_clean_mean": 0.0196718666332473,
+    "sobel_gaussian_noisy_mean": 0.03588882037229926,
+    "laplacian_clean_mean_abs": 0.024501292522294073,
+    "laplacian_noisy_mean_abs": 0.16566840958491205
+  },
+  "t8_pipeline": {
+    "Clean": {
+      "psnr_to_clean_db": null,
+      "image_std": 0.19077,
+      "entropy_bits": 7.45
+    },
+    "Noisy": {
+      "psnr_to_clean_db": 20.7843,
+      "image_std": 0.20694,
+      "entropy_bits": 7.5145
+    },
+    "Median": {
+      "psnr_to_clean_db": 37.204,
+      "image_std": 0.19094,
+      "entropy_bits": 7.4701
+    },
+    "CLAHE": {
+      "psnr_to_clean_db": 17.638,
+      "image_std": 0.22436,
+      "entropy_bits": 7.778
+    },
+    "Final": {
+      "psnr_to_clean_db": 17.3872,
+      "image_std": 0.22693,
+      "entropy_bits": 7.808
+    }
+  },
+  "software": "Python + scipy + scikit-image + OpenCV (reference run, not MATLAB)",
+  "units": {
+    "intensity": "[0,1]",
+    "psnr": "dB"
+  }
+}

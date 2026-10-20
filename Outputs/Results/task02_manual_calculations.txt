@@ -1,0 +1,22 @@
+Center patch P =
+[[25 35 45]
+ [30 40 50]
+ [35 45 55]]
+Kernel K =
+[[ 1  0 -1]
+ [ 2  0 -2]
+ [ 1  0 -1]]
+Flipped K =
+[[-1  0  1]
+ [-2  0  2]
+ [-1  0  1]]
+Correlation element products =
+[[  25    0  -45]
+ [  60    0 -100]
+ [  35    0  -55]]
+Sum = -80
+Convolution element products =
+[[-25   0  45]
+ [-60   0 100]
+ [-35   0  55]]
+Sum = 80

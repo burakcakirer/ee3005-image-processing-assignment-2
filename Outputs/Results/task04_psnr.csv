@@ -1,0 +1,11 @@
+noise,filter,psnr_db
+Gaussian sigma=.06,Noisy,25.8913
+Gaussian sigma=.06,Mean 3x3,30.4373
+Gaussian sigma=.06,Mean 5x5,28.1666
+Gaussian sigma=.06,Gaussian 3x3 s=.8,30.736
+Gaussian sigma=.06,Gaussian 7x7 s=1.4,29.0378
+Salt-pepper density=.08,Noisy,14.8669
+Salt-pepper density=.08,Mean 3x3,23.0336
+Salt-pepper density=.08,Mean 5x5,24.5305
+Salt-pepper density=.08,Gaussian 3x3 s=.8,22.1893
+Salt-pepper density=.08,Gaussian 7x7 s=1.4,24.7828

@@ -1,0 +1,14 @@
+# Preserve source line endings and prevent Git diff noise on non-text data.
+* text=auto
+*.m text eol=lf
+*.py text eol=lf
+*.tex text eol=lf
+*.md text eol=lf
+*.csv text eol=lf
+*.json text eol=lf
+*.pdf binary
+*.docx binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.dcm binary
